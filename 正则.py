@@ -36,8 +36,8 @@ def repractice04():
 
 def repractice05():
     # 匹配网址模板 '\w+@(\w+\.)+\.com'
-    patt = '\w+@(\w+\.)?\w+\.com'  # ?表示出现0或者1次
-    patt1 = '\w+@(\w+\.)*\w+\.com'  # *表示允许任意数量的中间子域名
+    patt = r'\w+@(\w+\.)?\w+\.com'  # ?表示出现0或者1次
+    patt1 = r'\w+@(\w+\.)*\w+\.com'  # *表示允许任意数量的中间子域名
     print(re.match(patt, 'nobody@xxx.com').group())
     print(re.match(patt, 'nobody@www.xxx.com').group())
     print(re.match(patt1, 'nobody@www.xxx.yyy.zzz.com').group())
@@ -63,8 +63,31 @@ def repractice08():
     print(re.subn('[ae]', 'X', 'abcdef'))
     # sub会替换，subn在替换的同时会返回替换了几处
 
-def repractice09():
-    print("hello")
+
+def test01():
+    strs = ['bat', 'bit', 'but', 'hat', 'hit', 'hut']
+    patt = '[bh][aiu]t'
+    for i in strs:
+        print(re.match(patt, i).group())
+
+
+def test02():
+    str2 = ['Lebron James', 'Steven Curry', 'Russel Westbrook', 'Kevin Durant']
+    patt = r'\w+ \w+'
+    for i in str2:
+        print(re.search(patt, i).group())
+
+
+def test03():
+    str3 = 'this is my job, I will work hard'
+    patt = r'\w+, \w+'
+    print(re.search(patt, str3).group())
+
+
+def test04():
+    str4 = 'das sadwdd s dsad  s'
+    patt = '[a-zA-Z_]+[\w_]+'
+    print(re.search(patt, str4).group())
 
 
 if __name__ == '__main__':
@@ -75,4 +98,8 @@ if __name__ == '__main__':
     # repractice05()
     # repractice06()
     # repractice07()
-    repractice08()
+    # repractice08()
+    # test01()
+    # test02()
+    # test03()
+    test04()
