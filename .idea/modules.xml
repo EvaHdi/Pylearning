@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/learning.iml" filepath="$PROJECT_DIR$/.idea/learning.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/littletest.iml" filepath="$PROJECT_DIR$/.idea/littletest.iml" />
+>>>>>>> 960c046 (正则表达式)
     </modules>
   </component>
 </project>
