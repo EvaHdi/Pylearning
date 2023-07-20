@@ -64,7 +64,7 @@ def repractice08():
     # sub会替换，subn在替换的同时会返回替换了几处
 
 def repractice09():
-    print()
+    print("hello")
 
 
 if __name__ == '__main__':
