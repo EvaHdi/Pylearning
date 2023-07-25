@@ -22,18 +22,29 @@ def write4K(start):
     print('Write to {}'.format(start))
 
 
-print('Sequential Write')
-start_address = 0
-# 最大地址为 100 * 1024 * 1024 - 1，即100MB范围内的最大地址，所以最后一次写操作无法进行，必须减去4096。
-end_address = 100 * 1024 * 1024 - 4096  # 首先全部转换为大B，100MB 范围内地址空间，每个写操作4KB
-while start_address <= end_address:
-    write4K(start_address)
-    start_address += 4096
+def Sequential_Write(start_address, end_address):
+    print('Sequential Write')
+    while start_address <= end_address:
+        write4K(start_address)
+        start_address += 4096
 
-print('Random Write')
-addresses = list(range(0, 100 * 1024 * 1024, 4096))
-random.shuffle(addresses)
-for address in addresses:
-    write4K(address)
 
+def Random_Write(mb, speed):
+    print('Random Write')
+    addresses = list(range(0, mb, speed))
+    addresses.pop(len(addresses)-1)  # 弹出列表最后一个地址，因为会越界
+    while len(addresses)>0:
+        num = random.randint(0,len(addresses)-1)
+        write4K(addresses.pop(num))
+
+
+
+if __name__ == '__main__':
+    start_address = 0
+    # 最大地址为 100 * 1024 * 1024 - 1，即100MB范围内的最大地址，所以最后一次写操作无法进行，必须减去4096。
+    end_address = 100 * 1024 * 1024 - 4096  # 首先全部转换为大B，100MB 范围内地址空间，每个写操作4KB
+    ssd = 100 * 1024 * 1024
+    speed = 4096
+    Sequential_Write(start_address, end_address)
+    Random_Write(ssd, speed)
 
