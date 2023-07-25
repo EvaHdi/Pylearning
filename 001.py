@@ -4,6 +4,15 @@
 @File : 001.py
 @Author : hongbo.zhang
 @Time : 2023/7/24 10:16
+
+利用random 库实现如下功能
+a) 有一个字符串  testStr = 'AaBbCcDdEeFfGgHhIiJjKkLlMmnOoPpQqRrSsTtUuVvWwXxYyZz'，实现一个函数 randpick：
+使用random随机库里的函数，生成一个由任意6个字符组成子字符串，并显示在屏幕上；
+要求randpick 每被调用五次生成相同字符串，即第1次随机产生，
+第5,10.次调用生成相同字符串（不能用保存第一次结果赋值的方式实现），其他情况随机生成字符串内容
+b) 生成一个[10, 100]之间以3为步长的随机整数列表
+c) 将上述序列随机打乱，生成一个随机列表
+
 """
 
 import random
