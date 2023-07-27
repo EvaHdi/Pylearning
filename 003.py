@@ -24,39 +24,46 @@
 输出：["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
 
 """
-
+res = []
 
 def restore_ip(s):
-    def backtrack(s, path, segments):
-        # 如果字符串s已经为空且segments为4，表示已经找到一个有效的IP地址
-        if not s and segments == 4:
-            res.append('.'.join(path))
-        # 剩余的字符数不足以形成有效的IP地址，或者剩余的字符数过多不能凑齐4个段
-        elif len(s) > (4 - segments) * 3 or len(s) < 4 - segments:
-            return
-        else:
-            # 每个段最多有三个数字
-            for i in range(min(3, len(s))):
-                segment = s[:i + 1]
-                # 剪枝操作，排除掉前导零和大于255的数字
-                if segment[0] == '0' and len(segment) > 1 or int(segment) > 255:
-                    continue
-                backtrack(s[i + 1:], path + [segment], segments + 1)
-
+    global res  # 代表引用全局变量
     res = []
-    backtrack(s, [], 0)
+    try:
+        backtrack(s, [], 0)
+    except ValueError:
+        print("无效的IP地址")
     return res
 
 
-# 测试样例
-s = "25525511135"
-print(restore_ip(s))  # Output: ["255.255.11.135", "255.255.111.35"]
+def backtrack(s, path, segments):
+    # 如果字符串s已经为空且segments为4，表示已经找到一个有效的IP地址
+    if not s and segments == 4:
+        res.append('.'.join(path))
+    # 剩余的字符数不足以形成有效的IP地址，或者剩余的字符数过多不能凑齐4个段
+    elif len(s) > (4 - segments) * 3 or len(s) < 4 - segments:
+        return
+        #raise ValueError  # 主动引发异常，而不是return一个空的列表
+    else:
+        # 每个段最多有三个数字
+        for i in range(min(3, len(s))):
+            segment = s[:i + 1]
+            # 剪枝操作，排除掉前导零和大于255的数字
+            if segment[0] == '0' and len(segment) > 1 or int(segment) > 255:
+                continue
+            backtrack(s[i + 1:], path + [segment], segments + 1)
 
-s = "0000"
-print(restore_ip(s))  # Output: ["0.0.0.0"]
 
-s = "101023"
-print(restore_ip(s))  # Output: ["1.0.10.23", "1.0.102.3", "10.1.0.23", "10.10.2.3", "101.0.2.3"]
+if __name__ == '__main__':
 
-s = "2552552552556"
-print(restore_ip(s))
+    # 测试样例
+    s = "25525511135"
+    print(restore_ip(s))  # Output: ["255.255.11.135", "255.255.111.35"]
+
+    s = "0000"
+    print(restore_ip(s))  # Output: ["0.0.0.0"]
+
+    s = "101023"
+    print(restore_ip(s))  # Output: ["1.0.10.23", "1.0.102.3", "10.1.0.23", "10.10.2.3", "101.0.2.3"]
+
+
