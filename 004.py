@@ -52,8 +52,9 @@ def remove(s):
 if __name__ == '__main__':
 
     s = "a)b(c)d"
-
     print('"' + remove(s) + '"')
-
     s = "))(("
     print('"' + remove(s) + '"')
+    while s != '0':
+        s = input("请输入任意字符串(输入0退出)：")
+        print(remove(s))
